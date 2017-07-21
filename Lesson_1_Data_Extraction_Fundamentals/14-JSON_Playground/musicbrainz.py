@@ -41,19 +41,15 @@ def pretty_print(data, indent=4):
 
 
 def main():
-    results = query_by_name(ARTIST_URL, query_type["simple"], "Queen")
+    results = query_by_name(ARTIST_URL, query_type["simple"], "Beatles")
     pretty_print(results)
 
     for artist_data in results['artists']:
-        art_name = artist_data.get('name')
-        disamb = artist_data.get('disambiguation')
-        if "begin-area" in artist_data:
-            begin_area_name = artist_data['begin-area'].get('name', 'Not available')
-        else:
-            begin_area_name = 'Not available'
-        print(u"Nome: {:s}, Disambiguation: {:s}, Area name: {:s}".format(art_name,\
-                                                                          disamb,\
-                                                                          begin_area_name))
+        # Find the ones from Liverpool
+        if "begin-area" in artist_data and artist_data['begin-area']['name'] == 'Liverpool':
+            if 'aliases' in artist_data:
+                for alias in artist_data['aliases']:
+                    print(u'Locale: {:s}, Alias: {:s}'.format(alias['locale'], alias['name']))
 
     # artist_id = results["artists"][1]["id"]
     # print "\nARTIST:"
