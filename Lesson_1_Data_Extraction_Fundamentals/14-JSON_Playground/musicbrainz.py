@@ -41,11 +41,19 @@ def pretty_print(data, indent=4):
 
 
 def main():
-    results = query_by_name(ARTIST_URL, query_type["simple"], "First Aid Kit")
+    results = query_by_name(ARTIST_URL, query_type["simple"], "Queen")
     pretty_print(results)
 
     for artist_data in results['artists']:
-        print("Artista: {:s}".format(artist_data['name']))
+        art_name = artist_data.get('name')
+        disamb = artist_data.get('disambiguation')
+        if "begin-area" in artist_data:
+            begin_area_name = artist_data['begin-area'].get('name', 'Not available')
+        else:
+            begin_area_name = 'Not available'
+        print(u"Nome: {:s}, Disambiguation: {:s}, Area name: {:s}".format(art_name,\
+                                                                          disamb,\
+                                                                          begin_area_name))
 
     # artist_id = results["artists"][1]["id"]
     # print "\nARTIST:"
