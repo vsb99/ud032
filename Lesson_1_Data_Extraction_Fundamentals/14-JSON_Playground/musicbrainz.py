@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # To experiment with this code freely you will have to run this code locally.
 # We have provided an example json output here for you to look at,
 # but you will not be able to run any queries through our UI.
